@@ -1,0 +1,35 @@
+{
+  "name": "maemaelog",
+  "version": "1.0.0",
+  "description": "maemaelog as SNS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-monple/maemaelog.git"
+  },
+  "keywords": [
+    "trading",
+    "log",
+    "social",
+    "network",
+    "service",
+    "SNS"
+  ],
+  "author": "monple",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-monple/maemaelog/issues"
+  },
+  "homepage": "https://github.com/the-monple/maemaelog#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.17"
+  },
+  "dependencies": {
+    "chart.js": "^3.6.0"
+  }
+}
