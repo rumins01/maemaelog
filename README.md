@@ -38,7 +38,7 @@ npm install
 ```
 
 ### 5. 환경 변수 추가
-Slack에서 받은 `.env` 파일을 프로젝트 루트 폴더에 추가
+**Slack**에서 받은 `.env` 파일을 프로젝트 루트 폴더에 추가
 
 ### 6. django 프로젝트 구동 테스트
 ```shell
@@ -48,3 +48,18 @@ python manage.py runserver
 웹 브라우저를 열고 http://127.0.0.1:8000/ 또는 http://localhost:8000/ 을 통해 장고 초기 화면 확인
 
 ![django 프로젝트 초기 화면](./asset/image/django-landing-page.png)
+
+### 7. 새로운 브랜치 생성 후 브랜치로 이동하여 작업 시작
+#### Option 1 - create new branch and check out separately
+```shell
+# create new branch
+git branch <branch-name>
+
+# check out(change to) new branch
+git checkout <branch-name>
+```
+#### Option 2 - create and check out at once with `-b` option
+```shell
+# create new branch and check out at once
+git checkout -b <branch-name>
+```
