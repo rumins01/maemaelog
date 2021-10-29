@@ -4,6 +4,16 @@
 
 상세 내용 [Notion - 금융 SNS](https://www.notion.so/efete/SNS-59545958efd14e3cb48d2d7c2ad17691) 참조
 
+## 작업 영역 및 작업자 구분
+```shell
+.
+├ tradelog      # 담당자: 오수민
+├ account       # 담당자: 이선문
+├ tradestats    # 담당자: 강명성
+├ marketdata    # 담당자: 장익제
+.
+```
+
 ## 프로젝트 시작 방법
 > terminal에서 진행하는 것을 가정<br />
 > 파이참에서는 아래 순서에 따른 설정을 개별 메뉴로 진행
