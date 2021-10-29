@@ -23,7 +23,14 @@
 mkdir maemaelog
 cd maemaelog
 ```
-### 2. 파이썬 가상환경 생성
+
+### 2. github에서 프로젝트 repository clone
+```shell
+# 현재 폴더를 루트 폴더로 하기 위해 마지막에 . 붙임
+git clone https://github.com/the-monple/maemaelog.git .
+```
+
+### 3. 파이썬 가상환경 생성
 ```shell
 # virtual environment name: maemaelog
 virtualenv maemaelog
@@ -33,12 +40,6 @@ virtualenv maemaelog
 
 # Mac
 source maemaelog/bin/activate
-```
-
-### 3. github에서 프로젝트 repository clone
-```shell
-# 현재 폴더를 루트 폴더로 하기 위해 마지막에 . 붙임
-git clone https://github.com/the-monple/maemaelog.git .
 ```
 
 ### 4. 필요한 파이썬과 노드 패키지 설치
