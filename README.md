@@ -32,14 +32,14 @@ git clone https://github.com/the-monple/maemaelog.git .
 
 ### 3. 파이썬 가상환경 생성
 ```shell
-# virtual environment name: maemaelog
-virtualenv maemaelog
+# virtual environment name: maemae
+virtualenv maemae
 
 # Window
-.\maemaelog\Scripts\activate
+.\maemae\Scripts\activate
 
 # Mac
-source maemaelog/bin/activate
+source maemae/bin/activate
 ```
 
 ### 4. 필요한 파이썬과 노드 패키지 설치
