@@ -1,0 +1,12 @@
+<nav>
+    <div id="logo">MAEMAE</div>
+    <ul id="menu">
+        {% if user.is_authenticated %}
+            <li id="profile" class="menu-item profile">{{ user.username }}</li>
+            <li id="logout" class="menu-item">로그아웃</li>
+        {% else %}
+            <li id="login" class="menu-item solid">로그인</li>
+            <li id="register" class="menu-item">가입하기</li>
+        {% endif %}
+    </ul>
+</nav>
