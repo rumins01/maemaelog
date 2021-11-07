@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'account',
     'tradelog',
     'tradestats',
-    'marketdata',
 ]
 
 MIDDLEWARE = [
