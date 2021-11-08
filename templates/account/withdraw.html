@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>withdraw</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}매매일지 - 회원탈퇴 {% endblock %}
+
+{% block content %}
+    {% include 'account_menu.html' %}
+
     <h1>회원탈퇴</h1>
 
     <h4> 탈퇴하시려면 비밀번호를 입력해주세요.</h4>
@@ -18,5 +17,4 @@
             <button type="submit" name="submit"> 회원탈퇴 </button>
         </div>
     </form>
-</body>
-</html>
+{% endblock %}

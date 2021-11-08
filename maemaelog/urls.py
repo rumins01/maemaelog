@@ -24,5 +24,4 @@ urlpatterns = [
     path('', include('tradelog.urls')),
 
     path('admin/', admin.site.urls),
-    path('account/', include("account.urls"))
 ]

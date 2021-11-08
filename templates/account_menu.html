@@ -1,0 +1,12 @@
+
+<ul id="account_menu">
+            <li id="profile" class="menu-item profile">
+                <a href="{% url 'account:profile-edit' %}">회원정보 수정</a>
+            </li>
+            <li id="password-change" class="menu-item">
+                <a href="{% url 'account:password-change' %}">비밀번호 변경</a>
+            </li>
+            <li id="withdraw" class="menu-item">
+                <a href="{% url 'account:withdraw' %}">회원탈퇴</a>
+            </li>
+</ul>

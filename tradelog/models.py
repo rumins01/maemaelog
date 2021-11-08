@@ -1,6 +1,7 @@
 from datetime import date
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 
 class TradeLog(models.Model):
@@ -12,7 +13,7 @@ class TradeLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField("stock name", max_length=40)
     code = models.CharField("stock code", max_length=20)
-    trade_at = models.DateTimeField("trade date", default=date.today())
+    trade_at = models.DateTimeField("trade date", default=timezone.now().date())
     price = models.IntegerField("trade price")
     amount = models.IntegerField("trade volume")
     type = models.CharField("trade type", max_length=1, choices=TRADE_TYPE)

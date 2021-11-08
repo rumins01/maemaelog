@@ -10,12 +10,19 @@ from account.models import Profile
 
 
 # Create your views here.
+def index(request):
+    context = {}
+    if request.user.is_authenticated:
+        try:
+            profile = Profile.objects.get(user=request.user)
+            context["profile"] = profile
+        except Exception as e:
+            print("Login: "+e)
+    return render(request, "account/index.html", context)
+
 
 def log_in(request):
     context = {}
-    if request.user.is_active:
-        profile = Profile.objects.get(user=request.user)
-        return redirect("tradelog:home", profile.nickname)
     if request.method == "POST":
         if request.POST.get("username") and request.POST.get("password"):
             username = request.POST.get("username")
@@ -29,7 +36,7 @@ def log_in(request):
                         auth.login(request, user)
                         profile = Profile.objects.get(user=request.user)
                         context["failed_message"] = "로그인 성공!"
-                        return redirect("tradelog:home", profile.nickname)
+                        return redirect("account:home")
                         # return render(request, "account/log-in.html", context)
 
                 context["failed_message"] = "잘못된 입력입니다."
@@ -46,7 +53,7 @@ def log_out(request):
     auth.logout(request)
     # if request.method == "POST":
 
-    return redirect("account:log-in")
+    return index(request)
 
 
 def sign_in(request):
@@ -75,7 +82,7 @@ def sign_in(request):
                         profile.save()
                         user.save()
                         auth.login(request, user)
-                        return redirect("tradelog:home", profile.nickname)
+                        return redirect("account:home")
                         # return render(request, "account/log-in.html", context)
                 except:
                     print("회원가입 중 에러 발생")
@@ -98,7 +105,7 @@ def withdraw(request):
                 print(user.is_active)
                 user.save()
                 auth.logout(request)
-                return redirect("account:log-in")
+                return redirect("account:home")
                 # return render(request, "account/log-in.html", context)
         context["failed_message"] = "잘못된 입력입니다."
 
