@@ -14,9 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include
+from django.urls import path
 
 urlpatterns = [
+    path('', include('account.urls')),
+
+    # 로그인 후 매매일지 대시보드로 연결 url - ex. https://www.maemaelog.com/nickname/
+    path('', include('tradelog.urls')),
+
     path('admin/', admin.site.urls),
     path('account/', include("account.urls"))
 ]
