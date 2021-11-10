@@ -1,26 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>signin</title>
-</head>
-<body>
-    <h1>회원가입</h1>
+{% extends 'base.html' %}
+{% block title %}매매일지 - 회원가입{% endblock %}
+{% block content %}
+<div class="w-screen h-screen flex flex-col items-center justify-start">
+    <div class="flex-col mt-36 mb-14">
+        <h1 class="text-5xl">회원가입</h1>
+    </div>
     <h2>{{ failed_message }}</h2>
     <form action="{% url 'account:sign-in'%}" method="post">
         {% csrf_token %}
         <div id="div-input-username">
-            <input type="email" name="username" placeholder="사용하실 email을 입력하세요."/>
+            <input class="w-64 h-8" type="email" name="username" placeholder="사용하실 email을 입력하세요." />
         </div>
         <div id="div-input-password">
-            <input type="password" name="password" placeholder="비밀번호를 입력하세요."/>
+            <input class="w-64 h-8" type="password" name="password" placeholder="비밀번호를 입력하세요." />
         </div>
         <div id="div-input-password-check">
-            <input type="password" name="password_check" placeholder="비밀번호를 다시 입력하세요."/>
+            <input class="w-64 h-8" type="password" name="password_check" placeholder="비밀번호를 다시 입력하세요." />
         </div>
         <div id="div-input-submit">
-            <button type="submit" name="submit"> 회원가입 </button>
+            <button class="w-64 h-8 bg-primary text-white text-lg" type="submit" name="submit"> 회원가입 </button>
         </div>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}

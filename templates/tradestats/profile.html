@@ -1,0 +1,19 @@
+{% load static %}
+{% load tailwind_tags %}
+<div id="profile" class="w-80 bg-gray-100 flex flex-row items-center justify-center">
+    <div id="profile-image" class="m-4 w-56">
+        {% if profile.profile_image %}
+        <img class="w-24 h-24 rounded-full" src="{{profile.profile_image.url}}" id="profile_img_thumbnail">
+        {% else %}
+        <img class="w-24 h-24 rounded-full" src="{% static '/image/profileimg_empty.png' %}" id="profile_img_thumbnail">
+        {% endif %}
+    </div>
+    <div id="profile-text" class="">
+        <div id="nickname">
+            <p class="w-48">{{profile.nickname}}</p>
+        </div>
+        <div id="bio">
+            <p class="w-40 h-auto break-words ">{{profile.bio}}</p>
+        </div>
+    </div>
+</div>

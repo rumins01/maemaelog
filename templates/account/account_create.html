@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}매매일지 - 계좌 추가{% endblock %}
+{% block content %}
+<div class="w-screen h-screen flex flex-row items-start justify-center">
+    {% include 'account_menu.html' %}
+    <div class="w-3/4 h-100% flex-col justify-center m-4 mt-24">
+        <div class="title">
+            <h1 class="text-lg">계좌 정보 추가</h1>
+        </div>
+        <div>
+            <form action="{% url 'account:create-account'%}" method="post">
+                {% csrf_token %}
+                <div id="div-input-name">
+                    <input class="w-64 h-8" type="text" name="name" placeholder="계좌별명을 입력하세요." />
+                </div>
+                <div id="div-input-account-brokerage">
+                    <select name="brokerage" id="brokerage">
+                        {% for k, v in brokerage %}
+                        <option value="{{ k }}">{{ v }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="div-input-account-number">
+                    <input class="w-64 h-8" type="text" name="account_number" placeholder="계좌번호를 입력하세요." />
+                </div>
+                <div id="div-input-password-check">
+                    <input class="w-64 h-8" type="number" name="fee" placeholder="수수료율을 입력하세요(10)." step="0.01" min="0"
+                        max="99999999999.99" />
+                </div>
+                <div id="div-input-submit">
+                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded my-4" type="submit" name="submit">
+                        계좌추가
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

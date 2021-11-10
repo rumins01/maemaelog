@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}매매일지 - 계좌 리스트{% endblock %}
+{% block content %}
+<div class="w-screen h-screen flex flex-row items-start justify-center">
+    {% include 'account_menu.html' %}
+    <div class="w-3/4 h-100% flex-col justify-center m-4 mt-24">
+        <div class="title">
+            <h1 class="text-lg">계좌 정보 리스트</h1>
+        </div>
+        <div class="account-list">
+            {% if accounts %}
+            <ul>
+                {% for item in accounts %}
+                <li class="m-4">
+                    <!--name number brokerage fee-->
+                    <a>
+                        {{item.id}}&nbsp; {{item.name}}&nbsp;
+                        <span>{{item.brokerage}}&nbsp;</span>
+                        <span>{{item.number}}&nbsp;</span>
+                        <span>{{item.fee}}</span>
+                    </a>
+                    <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
+                        href="{% url 'account:update-account' item.id %} ">수정</a>
+                    <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
+                        href="{% url 'account:delete-account' item.id %} ">삭제</a>
+                </li>
+                {% endfor%}
+            </ul>
+            {% else %}
+            <p>저장되어있는 계좌 정보가 없습니다.</p>
+            {% endif %}
+        </div>
+        <div>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded my-4">
+                <a href="{% url 'account:create-account'%}"> 계좌추가 </a>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
