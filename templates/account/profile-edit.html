@@ -6,7 +6,7 @@
     {% include 'account_menu.html' %}
 
     <div class="w-3/4 h-100% flex-col justify-center m-4 mt-24">
-        <h2>{{ failed_message }}</h2>
+        <h2 class="text-red-400 p-4">{{ failed_message }}</h2>
         <form action="{% url 'account:profile-edit' %}" method="post" id="form-edit" enctype="multipart/form-data">
             {% csrf_token %}
             <!-- 계정,프로필 사진 -->

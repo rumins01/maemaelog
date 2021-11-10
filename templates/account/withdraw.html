@@ -8,7 +8,7 @@
         <h1 class="text-5xl my-8">회원탈퇴</h1>
 
         <h4> 탈퇴하시려면 비밀번호를 입력해주세요.</h4>
-        <h2>{{ failed_message }}</h2>
+        <h2 class="text-red-400 p-4">{{ failed_message }}</h2>
         <form action="{% url 'account:withdraw'%}" method="post">
             {% csrf_token %}
             <div id="div-input-password">
