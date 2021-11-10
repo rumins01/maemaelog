@@ -138,3 +138,6 @@ node_modules/
 staticfiles/
 migrations/
 media/
+
+#allow pattern
+!__init__.py
