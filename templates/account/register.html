@@ -5,8 +5,8 @@
     <div class="flex-col mt-36 mb-14">
         <h1 class="text-5xl">회원가입</h1>
     </div>
-    <h2>{{ failed_message }}</h2>
-    <form action="{% url 'account:sign-in'%}" method="post">
+    <h2 class="text-red-400 p-4">{{ failed_message }}</h2>
+    <form action="{% url 'account:register'%}" method="post">
         {% csrf_token %}
         <div id="div-input-username">
             <input class="w-64 h-8" type="email" name="username" placeholder="사용하실 email을 입력하세요." />

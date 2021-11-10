@@ -36,7 +36,6 @@ def log_in(request):
                     if user.is_active:
                         auth.login(request, user)
                         profile = Profile.objects.get(user=request.user)
-                        context["failed_message"] = "로그인 성공!"
                         return redirect("account:home")
                         # return render(request, "account/log-in.html", context)
 
@@ -57,7 +56,7 @@ def log_out(request):
     return redirect("account:home")
 
 
-def sign_in(request):
+def register(request):
     context = {}
     if request.method == "POST":
         if (
@@ -91,7 +90,7 @@ def sign_in(request):
             pass
         else:
             context["failed_message"] = "잘못된 입력입니다."
-    return render(request, "account/sign-in.html", context)
+    return render(request, "account/register.html", context)
 
 
 def withdraw(request):
