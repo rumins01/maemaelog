@@ -24,6 +24,7 @@ urlpatterns = [
 
     # 로그인 후 매매일지 대시보드로 연결 url - ex. https://www.maemaelog.com/nickname/
     path('', include('tradelog.urls')),
+    path('tradestats/', include('tradestats.urls')),
 
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
