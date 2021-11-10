@@ -1,12 +1,33 @@
-<nav>
-    <div id="logo">MAEMAE</div>
-    <ul id="menu">
+<nav class="w-screen bg-primary flex items-center justify-between p-6 text-white fixed">
+    <div id="logo">
+        <a class="text-2xl" href="{% url 'account:home' %}">MAEMAE</a>
+    </div>
+    <!-- <ul id="menu">
         {% if user.is_authenticated %}
-            <li id="profile" class="menu-item profile">{{ user.username }}</li>
-            <li id="logout" class="menu-item">로그아웃</li>
+            <li id="profile" class="menu-item profile">
+                <a href="{% url 'account:profile-edit' %}">{{ user.username }}</a>
+            </li>
+            <li id="logout" class="menu-item">
+                <a href="/log-out">로그아웃</a>
+            </li>
         {% else %}
-            <li id="login" class="menu-item solid">로그인</li>
-            <li id="register" class="menu-item">가입하기</li>
+            <li id="login" class="menu-item solid">
+                <a href="/log-in">로그인</a>
+            </li>
+            <li id="register" class="menu-item">
+                <a href="/sign-in">가입하기</a>
+            </li>
         {% endif %}
-    </ul>
+    </ul> -->
+
+    <div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'account:profile-edit' %}">{{ user.username }}</a>
+        <a href="/log-out">로그아웃</a>
+        {% else %}
+        <a href="/log-in">로그인</a>
+        <a href="/register">가입하기</a>
+
+        {% endif %}
+    </div>
 </nav>

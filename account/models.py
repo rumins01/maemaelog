@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 def get_upload_path(instance, filename):
-    return f"{instance.user.id}/profile/image/"
+    return f"/assets/image/profile/"
 
 
 # Create your models here.
@@ -12,7 +12,7 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=32)
     bio = models.TextField()
     profile_image = models.ImageField(
-        upload_to=get_upload_path,
+        upload_to="assets/image/profile/",
         blank=True,
         null=True
     )

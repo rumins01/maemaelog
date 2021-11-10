@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}매매일지 - 로그인{% endblock %}
+{% block content %}
+<div class="w-screen h-screen flex flex-col items-center justify-start">
+    <div class="flex-col mt-36 mb-14">
+        <h1 class="text-5xl">로그인</h1>
+    </div>
+    <div class="flex-col text-red-400 p-4">
+        <p>{{ failed_message }}</p>
+    </div>
+    <div class="flex flex-row justify-center">
+        <form action="{% url 'account:log-in'%}" method="post" id="form-login">
+            {% csrf_token %}
+            <div id="div-input-username">
+                <input class="w-64 h-8" type="email" name="username" placeholder="email" />
+            </div>
+            <div id="div-input-password">
+                <input class="w-64 h-8" type="password" name="password" placeholder="비밀번호를 입력하세요" />
+            </div>
+        </form>
+    </div>
+    <div id="div-input-submit" class="m-4">
+        <button class="w-64 h-8 bg-primary text-white text-lg" type="submit" name="submit" form="form-login">
+            로그인
+        </button>
+    </div>
+    <div class="flex-col m-4">
+        <form action="{% url 'account:register'%}" method="get">
+            {% csrf_token %}
+            <div id="div-input-register">
+                <button type="submit" name="register">회원가입</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

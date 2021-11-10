@@ -133,3 +133,12 @@ node_modules/
 
 # pycharm
 .idea/
+
+#custom dir
+static/
+migrations/
+media/
+
+#allow pattern
+!__init__.py
+

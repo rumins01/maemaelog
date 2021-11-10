@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}매매일지 - 프로필 수정 {% endblock %}
+{% block content %}
+<div class="w-screen h-screen flex flex-row items-start justify-center">
+    {% include 'account_menu.html' %}
+
+    <div class="w-3/4 h-100% flex-col justify-center m-4 mt-24">
+        <h2 class="text-red-400 p-4">{{ failed_message }}</h2>
+        <form action="{% url 'account:profile-edit' %}" method="post" id="form-edit" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- 계정,프로필 사진 -->
+            <div class="">
+                {% if profile.profile_image %}
+                <img class="w-24 h-24 rounded-full" src="{{profile.profile_image.url}}" id="profile_img_thumbnail">
+                {% else %}
+                <img class="w-24 h-24 rounded-full" src="{% static '/image/profileimg_empty.png' %}" id="profile_img_thumbnail">
+                {% endif %}
+                <input type="file" id="profileimg" name="imagefile" accept="image/*" onchange="setThumbnail(event)"><br>
+                <h3>{{user.username}}</h3>
+            </div>
+            <!-- 닉네임 -->
+            <div class="">
+                <label>닉네임 : </label>
+                <input type="text" name="nickname" value="{{ profile.nickname }}" />
+            </div>
+            <!-- 소개 -->
+            <div>
+                <label>소개 : </label>
+                <input type="text" name="bio" value="{{ profile.bio }}" />
+            </div>
+            <!-- 휴대폰 번호 -->
+            <div>
+                <label>휴대폰 번호 : </label>
+                <input type="tel" name="phone_number" value="{{ profile.phone_number }}" />
+            </div>
+            <!-- 성별 -->
+            <div>
+                <label>성별 : </label>
+                <input type="text" name="sex" value="{{ profile.sex }}" />
+            </div>
+        </form>
+        <div>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded my-4" type="submit" form="form-edit">적용</button>
+        </div>
+    </div>
+</div>
+<!--{% include 'tradestats/profile.html' %}-->
+{% endblock %}
+{% block script %}
+<script>
+    function setThumbnail(event){
+        for (const image of event.target.files){
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = document.getElementById("profile_img_thumbnail");
+                img.src = event.target.result
+            };
+            console.log(image);
+            reader.readAsDataURL(image);
+        }
+    }
+
+
+</script>
+{% endblock %}
