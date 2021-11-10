@@ -135,7 +135,7 @@ node_modules/
 .idea/
 
 #custom dir
-staticfiles/
+static/
 migrations/
 media/
 
