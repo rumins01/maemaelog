@@ -133,3 +133,8 @@ node_modules/
 
 # pycharm
 .idea/
+
+#custom dir
+staticfiles/
+migrations/
+media/
