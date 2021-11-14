@@ -1,0 +1,20 @@
+
+
+<h1>매매일지</h1>
+
+<a href='{% url 'tradelog:create' %}'>매매일지 작성</a>
+
+
+<!-- 이 공간에는 블로그 글들의 목록을 보여줄 예정 -->
+{% for post in posts %}
+        <h1>------------------------</h1>
+        <a href="{% url 'tradelog:detail' post.id %}"><h3>날짜 : {{ post.create_at }}</h3></a>
+        <h4>종목명 : {{ post.name }}</h4>
+        <h4>가격 : {{ post.price }}</h4>
+        <h4>체결량 : {{ post.amount }}</h4>
+
+        <a href="{% url 'tradelog:update' post.id %}">수정하기</a>
+        <a href="{% url 'tradelog:delete' post.id %}">글 삭제하기</a>
+    
+
+{% endfor %}
