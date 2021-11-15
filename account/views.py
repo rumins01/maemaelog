@@ -18,7 +18,8 @@ def index(request):
             profile = Profile.objects.get(user=request.user)
             context["profile"] = profile
         except Exception as e:
-            print("Login: " + e)
+            pass
+            # print("Login: " + e)
     return render(request, "account/index.html", context)
 
 
@@ -30,7 +31,7 @@ def log_in(request):
             password = request.POST.get("password")
             p = re.compile('^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
             if username == "admin" or p.match(username) is not None:
-                print(f"{username} {password}")
+                # print(f"{username} {password}")
                 user = authenticate(username=username, password=password)
                 if user is not None:
                     if user.is_active:
@@ -41,7 +42,7 @@ def log_in(request):
 
                 context["failed_message"] = "잘못된 입력입니다."
             else:
-                print(f"{username} isn't email")
+                # print(f"{username} isn't email")
                 context["failed_message"] = "ID가 이메일 형식이 아닙니다."
         else:
             context["failed_message"] = "잘못된 입력입니다."
@@ -85,7 +86,8 @@ def register(request):
                         return redirect("account:home")
                         # return render(request, "account/log-in.html", context)
                 except:
-                    print("회원가입 중 에러 발생")
+                    pass
+                    # print("회원가입 중 에러 발생")
                 context["failed_message"] = "가입할 수 없는 정보가 입력 되어있습니다."
             pass
         else:
@@ -96,13 +98,13 @@ def register(request):
 def withdraw(request):
     context = {}
     if request.method == "POST":
-        print(request.user.username)
+        # print(request.user.username)
         if request.POST.get("password"):
             password = request.POST.get("password")
             user = authenticate(username=request.user.username, password=password)
             if user is not None:
                 user.is_active = False
-                print(user.is_active)
+                # print(user.is_active)
                 user.save()
                 auth.logout(request)
                 return redirect("account:home")
@@ -132,7 +134,7 @@ def password_change(request):
 def profile_edit(request):
     context = {}
     profile = Profile.objects.get(user=request.user)
-    print(profile.profile_image.url)
+    # print(profile.profile_image.url)
     context["profile"] = profile
     if request.method == "POST":
         user = request.user
