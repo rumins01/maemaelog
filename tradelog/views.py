@@ -4,7 +4,7 @@ from .models import TradeLog
 from .forms import CreatForm
 
 def dashboard(request):
-    posts = TradeLog.objects.filter().order_by('-update_at')
+    posts = TradeLog.objects.filter(name='user').order_by('-update_at')
     return render(request, 'tradelog/dashboard.html', {'posts' : posts})
 
 def create(request):
