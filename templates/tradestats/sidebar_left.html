@@ -1,0 +1,60 @@
+<head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+        <style>
+                .charta {
+                        width : 400px;
+                }
+        </style>
+</head>
+<body>
+        <h1>
+                총 매수 금액 : {{ total_buy }}<br>
+                총 매도 금액 : {{ total_sell }}<br>
+                총 자산 : {{ total_asset }}<br>
+                투자 원금 : {{ principal }}<br>
+                총 수익 : {{ total_return }}<br>
+                일간 수익 : {{ today_return }}<br>
+        </h1>
+        <div class = "charta">
+                <canvas id="myChart" width="50" height="50"></canvas>
+        </div>
+        <script>
+        const ctx = document.getElementById('myChart');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ date_forchart|safe }},
+                datasets: [{
+                    label: '총 자산',
+                    data: {{ totalasset_forchart|safe }},
+                    backgroundColor:[
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+</body>
