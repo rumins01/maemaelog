@@ -16,8 +16,8 @@ def mystock_rank(request):
     return render(request, "tradelog/sidebar_right.html", context)
 
 
-def KPI(request, user_name=1):
-    tradelog_raw = pd.DataFrame((TradeLog.objects.filter(user=user_name)).values())
+def KPI(request):
+    tradelog_raw = pd.DataFrame((TradeLog.objects.filter(user=request.user)).values())
 
     #total_sell&buy
     total_sell = format(int(sum(tradelog_raw[tradelog_raw['type'] == 'S']['price'] * tradelog_raw[tradelog_raw['type'] == 'S']['amount'])),',d')
@@ -117,5 +117,3 @@ def KPI(request, user_name=1):
 
 d_today_raw = datetime.today()
 d_today = d_today_raw.strftime('%Y-%m-%d')
-
-
