@@ -17,6 +17,7 @@ def index(request):
         try:
             profile = Profile.objects.get(user=request.user)
             context["profile"] = profile
+            return redirect("tradelog:dashboard")
         except Exception as e:
             pass
             # print("Login: " + e)
@@ -37,7 +38,8 @@ def log_in(request):
                     if user.is_active:
                         auth.login(request, user)
                         profile = Profile.objects.get(user=request.user)
-                        return redirect("account:home")
+                        # return redirect("account:home")
+                        return redirect("tradelog:dashboard")
                         # return render(request, "account/log-in.html", context)
 
                 context["failed_message"] = "잘못된 입력입니다."

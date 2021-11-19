@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}매매일지 - 대시보드{% endblock %}
 {% block content %}
-    <div id="content">
-        <div id="sidebar-left">
+    <div id="content" class="min-h-screen flex justify-between m-16 pt-6 gap-6">
+        <div id="sidebar-left" class="w-80">
             {% include 'tradestats/sidebar_left.html' %}
         </div>
-        <div id="feed">
+        <div id="feed" class="w-full h-full bg-gray-100">
             {% include 'tradelog/feed.html' %}
         </div>
-        <div id="sidebar-right">
+        <div id="sidebar-right" class="w-80">
             {% include 'tradelog/sidebar_right.html' %}
         </div>
     </div>
