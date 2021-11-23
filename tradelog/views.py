@@ -1,22 +1,30 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
 
-import tradelog
+from account.models import Profile
 from .models import TradeLog
-from .forms import CreatForm
+from .forms import CreateForm
 import pandas as pd
 import requests
+
 
 def dashboard(request, tradelog_code=None):
     if not request.user.is_authenticated:
         return redirect("account:log-in")
-    if tradelog_code == None:
-        posts = TradeLog.objects.filter(user=request.user).order_by()
-    elif tradelog_code != None:
-        posts = TradeLog.objects.filter(user=request.user, code=tradelog_code).order_by()
-        # return render(request, 'tradelog/dashboard.html', {'posts': posts})
-        
 
+    context = getDashBoardData(request, tradelog_code)
+   
+    return render(request, 'tradelog/dashboard.html', context)
+
+
+def getDashBoardData(request, tradelog_code=None):
+    if tradelog_code == None:
+        posts = TradeLog.objects.filter(user=request.user).order_by('-update_at')
+    elif tradelog_code != None:
+        posts = TradeLog.objects.filter(user=request.user, code=tradelog_code).order_by('-update_at')
+        # return render(request, 'tradelog/dashboard.html', {'posts': posts})
+
+    """
     #stockrank
     mystock_rank_object = TradeLog.objects.filter(user=request.user)
     mystock_rank_raw1 = pd.DataFrame(mystock_rank_object.values())
@@ -25,6 +33,7 @@ def dashboard(request, tradelog_code=None):
     mystock_rank_raw3 = mystock_rank_raw2.head(10)
 
     tradelog_raw = pd.DataFrame((TradeLog.objects.filter(user=request.user)).values())
+
 
     # total_sell&buy
     total_sell = format(int(sum(
@@ -129,12 +138,21 @@ def dashboard(request, tradelog_code=None):
                'date_forchart': date_forchart,
                'totalasset_forchart': totalasset_forchart,
                }
-    return render(request, 'tradelog/dashboard.html', context)
+    """
+    context = {"posts": posts,}
+    profile = Profile.objects.get(user=request.user)
+    if profile:
+        context["profile"] = profile
+
+    return context
+
+
+
 
 
 def create(request):
     form = CreateForm()
-    context = {}
+    failed_message = ""
     if(request.method == 'POST'):
         tradelog = TradeLog()
         tradelog.user = request.user
@@ -144,7 +162,7 @@ def create(request):
         price = int(request.POST['price'])
         volume = int(request.POST['amount'])
         if price <= 0 or volume <= 0:
-            context["failed_message"] = "가격과 거래량은 0이상이어야 합니다."
+            failed_message = "가격과 거래량은 0이상이어야 합니다."
         else:
             if form.is_valid():
                 form.save()
@@ -152,12 +170,12 @@ def create(request):
             else:
                 pass
     else:
-        pass
-    
+        form = CreateForm()
+    context = getDashBoardData(request)
+    context['failed_message'] = failed_message
+    context['isCreate'] = True
     context['form'] = form
-    return render(request, 'tradelog/form_create.html', context)
-
-
+    return render(request, 'tradelog/dashboard.html', context)
 
 def detail(request, tradelog_id):
     tradelog_detail = get_object_or_404(TradeLog, pk=tradelog_id)

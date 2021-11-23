@@ -25,13 +25,10 @@
             로그인
         </button>
     </div>
-    <div class="flex-col m-4">
-        <form action="{% url 'account:register'%}" method="get">
-            {% csrf_token %}
-            <div id="div-input-register">
-                <button type="submit" name="register">회원가입</button>
-            </div>
-        </form>
+    <div class="flex flex-col items-center m-2">
+        <a href="{% url 'account:register' %}" class="text-center">회원가입</a>
+        <br>
+        <a href="{% url 'password_reset' %}" class="text-center">비밀번호 찾기</a>
     </div>
 </div>
 {% endblock %}

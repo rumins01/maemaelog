@@ -7,54 +7,81 @@
         </style>
 </head>
 <body>
-        <h1>
+    <div class="border-b p-8 text-center">
+        <p class="text-base">
+            총 자산
+        </p>
+        <h5 class="text-2xl font-semibold">
+            30,851,789원{{ total_asset }}
+        </h5>
+        <p class="text-sm text-primary">
+            +15,693,387원{{total_return}}
+        </p>
+
+        <!-- <h1>
                 총 매수 금액 : {{ total_buy }}<br>
                 총 매도 금액 : {{ total_sell }}<br>
                 총 자산 : {{ total_asset }}<br>
                 투자 원금 : {{ principal }}<br>
                 총 수익 : {{ total_return }}<br>
                 일간 수익 : {{ today_return }}<br>
-        </h1>
-        <div class = "charta">
-                <canvas id="myChart" width="50" height="50"></canvas>
+        </h1> -->
+    </div>
+    <div class = "charta border-b p-8">
+            <canvas id="myChart" width="50" height="50"></canvas>
+    </div>
+    <div class="border-b px-8 flex justify-between gap-4">
+        <div class="">
+            <p>총 매수 금액</p>
+            <p>총 매도 금액</p>
+            <p>일간 수익</p>
+            <p>투자 원금</p>
         </div>
-        <script>
-        const ctx = document.getElementById('myChart');
-        const myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: {{ date_forchart|safe }},
-                datasets: [{
-                    label: '총 자산',
-                    data: {{ totalasset_forchart|safe }},
-                    backgroundColor:[
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 99, 132, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 99, 132, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+        <div class="">
+            <p>30,851,789원{{ total_buy }}</p>
+            <p>30,851,789원{{ total_sell }}</p>
+            <p>30,851,789원{{ today_return }}</p>
+            <p>30,851,789원{{ principal }}</p>
+        </div>
+
+    </div>
+    <script>
+    const ctx = document.getElementById('myChart');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ date_forchart|safe }},
+            datasets: [{
+                label: '총 자산',
+                data: {{ totalasset_forchart|safe }},
+                backgroundColor:[
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
-        </script>
+        }
+    });
+    </script>
 </body>
