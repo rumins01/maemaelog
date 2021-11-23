@@ -1,8 +1,14 @@
+<div class="p-4 h-14 bg-primary">
+    <p class="text-white font-semibold">RANKING</p>
+</div>
+
 {% for name, amount in mystock_rank.items %}
-<h1>
-    {{ name }}
-    {{ amount }}
-</h1>
+<div class="p-4 border-b">
+    <h1>
+        {{ name }}
+        {{ amount }}
+    </h1>
+</div>
 {% endfor %}
 
 

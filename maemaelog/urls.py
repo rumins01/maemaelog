@@ -19,6 +19,9 @@ from django.contrib import admin
 from django.urls import include
 from django.urls import path
 
+
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
     path('', include('account.urls')),
 
@@ -27,4 +30,11 @@ urlpatterns = [
     path('tradestats/', include('tradestats.urls')),
 
     path('admin/', admin.site.urls),
+
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name="account/password_reset.html"), name="password_reset"),
+    path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name="account/password_reset_done.html"), name="password_reset_done"),
+    path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="account/password_reset_confirm.html"),
+       name="password_reset_confirm"),
+    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="account/password_reset_complete.html"),
+       name="password_reset_complete"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

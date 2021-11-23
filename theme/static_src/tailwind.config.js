@@ -53,7 +53,9 @@ module.exports = {
     theme: {
         extend: {
           colors:{
-            primary:"#17a47e",
+            primary:"#0CAF82",
+            line : "#E7F7F3",
+            custom_black:"#2F4F4F",
           },
           spacing: {
             yscreen: "100vh",
