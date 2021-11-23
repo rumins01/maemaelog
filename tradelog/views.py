@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
+
+from account.models import Profile
 from .models import TradeLog
 from .forms import CreatForm
 import pandas as pd
 import requests
 
-def dashboard(request):
-    posts = TradeLog.objects.filter(user=request.user).order_by('-update_at')
 
+def getDashBoardData(request):
+
+    posts = TradeLog.objects.filter(user=request.user).order_by('-update_at')
+    """
     #stockrank
     mystock_rank_object = TradeLog.objects.filter(user=request.user)
     mystock_rank_raw1 = pd.DataFrame(mystock_rank_object.values())
@@ -16,6 +20,7 @@ def dashboard(request):
     mystock_rank_raw3 = mystock_rank_raw2.head(10)
 
     tradelog_raw = pd.DataFrame((TradeLog.objects.filter(user=request.user)).values())
+
 
     # total_sell&buy
     total_sell = format(int(sum(
@@ -120,6 +125,19 @@ def dashboard(request):
                'date_forchart': date_forchart,
                'totalasset_forchart': totalasset_forchart,
                }
+    """
+    context = {"posts": posts,}
+    profile = Profile.objects.get(user=request.user)
+    if profile:
+        context["profile"] = profile
+
+    return context
+
+
+def dashboard(request):
+
+    context = getDashBoardData(request)
+   
     return render(request, 'tradelog/dashboard.html', context)
 
 def create(request):
@@ -130,7 +148,10 @@ def create(request):
             return redirect('tradelog:dashboard')
     else:
         form = CreatForm()
-    return render(request, 'tradelog/form_create.html', {'form':form})
+    context = getDashBoardData(request)
+    context['isCreate'] = True
+    context['form'] = form
+    return render(request, 'tradelog/dashboard.html', context)
 
 def detail(request, tradelog_id):
     tradelog_detail = get_object_or_404(TradeLog, pk=tradelog_id)

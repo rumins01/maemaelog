@@ -3,6 +3,7 @@ from django.urls import path
 
 from account import views
 
+
 app_name = "account"
 urlpatterns = [
     # TODO: 랜딩 페이지 뷰 및 연결 url - https://www.maemaelog.com/
@@ -21,4 +22,5 @@ urlpatterns = [
     path("create-account", views.create_account, name="create-account"),
     path("<int:account_id>/update-account/", views.update_account, name="update-account"),
     path("<int:account_id>/delete-account/", views.delete_account, name="delete-account"),
+
 ]
