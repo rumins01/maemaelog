@@ -5,7 +5,7 @@
 <!-- 이 공간에는 블로그 글들의 목록을 보여줄 예정 -->
 {% for post in posts %}
         <div class="border-b p-4">
-                <p class="font-semibold">{{ post.name }}</p>
+                <a href="{% url 'tradelog:dashboard' post.code %}"><p class="font-semibold">{{ post.name }}</p></a>
                 <div class="py-2 flex justify-start gap-4 box-border text-center">
                         <div>
                                 <p>매수/매도</p>
@@ -36,3 +36,4 @@
         </div>
 
 {% endfor %}
+

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import environ
 import os
+from sys import platform as _platform
 
 from pathlib import Path
 
@@ -142,7 +143,15 @@ TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
+if _platform == "win32" or _platform == "win64":
+    NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+else :
+    NPM_BIN_PATH = r"/usr/local/bin/npm"
+
+
+
+
 
 # SMTP Setting
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -158,3 +167,4 @@ EMAIL_HOST_PASSWORD = '비밀번호'
 EMAIL_USE_TLS = True
 # 사이트와 관련한 자동응답을 받을 이메일 주소
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
