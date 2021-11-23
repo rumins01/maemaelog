@@ -6,6 +6,7 @@ urlpatterns = [
     # TODO: 매매일지 대시보드 url - https://www.maemaelog.com/nickname/
     # path('<slug:nickname>/', name='dashboard'),
     path('dashboard/',views.dashboard, name='dashboard'),
+    path('dashboard/<int:tradelog_code>',views.dashboard, name='dashboard'),
     path('create/', views.create, name='create'),
     path('detail/<int:tradelog_id>', views.detail, name="detail"),
     path('update/<int:tradelog_id>', views.update, name="update"),

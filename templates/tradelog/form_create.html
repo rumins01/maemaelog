@@ -1,4 +1,9 @@
-<h1>django form을 이용한 새 글 작성 페이지</h1>
+<h1>매매일지 작성하기</h1>
+
+<div class="flex-col text-red-400 p-4">
+    <p>{{ failed_message }}</p>
+</div>
+
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}  
     <table>
