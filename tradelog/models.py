@@ -26,6 +26,12 @@ class TradeLog(models.Model):
     def __str__(self):
         return self.name
 
+    def get_trade_type(self):
+        tradeType = {
+            "B": "매수",
+            "S": "매도",
+        }
+        return tradeType[self.type]
 
 class Account(models.Model):
     BROKERAGE_NAME = [

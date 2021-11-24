@@ -3,7 +3,7 @@
 {% if isCreate %}
 <div class="w-screen h-screen bg-black bg-opacity-30 fixed flex justify-center items-center" 
     id="feed-create-layer-popup" onclick="goToDashboard(event)">
-    <div class="w-auto h-auto m-auto bg-white">
+    <div class="w-1/2 h-auto m-auto bg-white">
         <h1 class="text-custom_black">매매일지 작성하기</h1>
         <div class="flex-col text-red-400 p-4">
             <p>{{ failed_message }}</p>
@@ -18,9 +18,6 @@
     </div>
 </div>
 
-
-
-{% endif %}
 <script>
     function goToDashboard(event){
         console.log(event);
@@ -31,4 +28,7 @@
         }
     }
 </script>
+
+
+{% endif %}
 
