@@ -13,7 +13,7 @@ def dashboard(request, tradelog_code=None):
         return redirect("account:log-in")
 
     context = getDashBoardData(request, tradelog_code)
-   
+
     return render(request, 'tradelog/dashboard.html', context)
 
 
@@ -139,7 +139,7 @@ def getDashBoardData(request, tradelog_code=None):
                'totalasset_forchart': totalasset_forchart,
                }
     """
-    context = {"posts": posts,}
+    context = {"posts": posts, }
     profile = Profile.objects.get(user=request.user)
     if profile:
         context["profile"] = profile
@@ -147,17 +147,14 @@ def getDashBoardData(request, tradelog_code=None):
     return context
 
 
-
-
-
 def create(request):
     form = CreateForm()
     failed_message = ""
-    if(request.method == 'POST'):
+    if (request.method == 'POST'):
         tradelog = TradeLog()
         tradelog.user = request.user
         form = CreateForm(request.POST, instance=tradelog)
-        
+
         # 가격과 거래량 검사
         price = int(request.POST['price'])
         volume = int(request.POST['amount'])
@@ -177,23 +174,24 @@ def create(request):
     context['form'] = form
     return render(request, 'tradelog/dashboard.html', context)
 
+
 def detail(request, tradelog_id):
     tradelog_detail = get_object_or_404(TradeLog, pk=tradelog_id)
-    return render(request, 'tradelog/detail.html', {'tradelog_detail':tradelog_detail,})
-
+    return render(request, 'tradelog/detail.html', {'tradelog_detail': tradelog_detail, })
 
 
 def update(request, tradelog_id):
     context = {}
+    failed_message=""
     my_tradelog = get_object_or_404(TradeLog, pk=tradelog_id)
     if request.method == 'POST':
-        update_form = CreateForm(request.POST, instance = my_tradelog)
-        
+        update_form = CreateForm(request.POST, instance=my_tradelog)
+
         # 가격과 거래량 검사
         price = int(request.POST['price'])
         volume = int(request.POST['amount'])
         if price <= 0 or volume <= 0:
-            context["failed_message"] = "가격과 거래량은 0이상이어야 합니다."
+            failed_message = "가격과 거래량은 0이상이어야 합니다."
         else:
             if update_form.is_valid():
                 update_form.save()
@@ -202,10 +200,13 @@ def update(request, tradelog_id):
                 pass
     else:
         update_form = CreateForm(instance=my_tradelog)
-
+    context = getDashBoardData(request)
+    context['failed_message'] = failed_message
+    context['isUpdate'] = True
     context['update_form'] = update_form
-    return render(request, 'tradelog/update.html', context)
-
+    return render(request, 'tradelog/dashboard.html', context)
+    #
+    # return render(request, 'tradelog/update.html', context)
 
 
 def delete(request, tradelog_id):

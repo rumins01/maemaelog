@@ -1,19 +1,19 @@
 {% load static %}
 {% load tailwind_tags %}
 <div id="profile" class="border-b p-4 flex flex-col items-center justify-center">
-    <div id="profile-image" class="m-4 w-56 place-items-center" >
+    <div id="profile-image" class="w-56 place-items-center" >
         {% if profile.profile_image %}
         <img class="w-24 h-24 rounded-full m-auto block" src="{{profile.profile_image.url}}" id="profile_img_thumbnail">
         {% else %}
         <img class="w-24 h-24 rounded-full m-auto block" src="{% static '/image/profileimg_empty.png' %}" id="profile_img_thumbnail">
         {% endif %}
     </div>
-    <div id="profile-text" class="text-center">
+    <div id="profile-text" class="text-center p-2">
         <div id="nickname">
-            <p class="w-auto">{{profile.nickname}}</p>
+            <p class="w-auto font-semibold py-2">{{profile.nickname}}</p>
         </div>
         <div id="bio">
-            <p class="w-auto h-auto break-words ">{{profile.bio}}</p>
+            <p class="w-auto h-auto break-words text-sm">{{profile.bio}}</p>
         </div>
     </div>
 </div>
