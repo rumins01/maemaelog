@@ -12,10 +12,10 @@
             총 자산
         </p>
         <h5 class="text-2xl font-semibold">
-            30,851,789원{{ total_asset }}
+            {{ total_asset }}원
         </h5>
         <p class="text-sm text-primary">
-            +15,693,387원{{total_return}}
+            {{total_return}}원
         </p>
 
         <!-- <h1>
@@ -38,10 +38,10 @@
             <p>투자 원금</p>
         </div>
         <div class="">
-            <p>30,851,789원{{ total_buy }}</p>
-            <p>30,851,789원{{ total_sell }}</p>
-            <p>30,851,789원{{ today_return }}</p>
-            <p>30,851,789원{{ principal }}</p>
+            <p>{{ total_buy }}원</p>
+            <p>{{ total_sell }}원</p>
+            <p>{{ today_return }}원</p>
+            <p>{{ principal }}원</p>
         </div>
 
     </div>
@@ -50,10 +50,10 @@
     const myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [1,2,3,4,5,6,7],
+            labels: {{date_forchart|safe}},
             datasets: [{
                 label: '총 자산',
-                data: [10000,20000,40000,30000,24000,50000,34000],
+                data: {{totalasset_forchart|safe}},
                 backgroundColor:[
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 99, 132, 0.2)',

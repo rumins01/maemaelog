@@ -35,7 +35,7 @@
                         <a class="px-2 border-2 border-primary rounded-2xl" href="{% url 'tradelog:update' post.id %}">수정</a>
                         <a class="px-2 border-2 border-primary rounded-2xl" href="{% url 'tradelog:delete' post.id %}">삭제</a>
                 </div>
-                <p class="text-xs text-right">{{ post.create_at|date:"Y-m-d" }}</p>
+                <p class="text-xs text-right">{{ post.trade_at|date:"Y-m-d" }}</p>
                 <!-- <a href="{% url 'tradelog:detail' post.id %}"><h3>날짜 : {{ post.create_at }}</h3></a>
                 <h4>종목명 : {{ post.name }}</h4>
                 <h4>가격 : {{ post.price }}</h4>

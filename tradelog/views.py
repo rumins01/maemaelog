@@ -6,6 +6,25 @@ from .models import TradeLog
 from .forms import CreateForm
 import pandas as pd
 import requests
+from dal import autocomplete
+from datetime import datetime, timedelta
+
+res10 = requests.get('http://marketdata.monple.com/api/').json()
+
+StockNameList = []
+StockTickerList = []
+
+for i in range(len(res10)):
+    StockNameList.append(res10[i]['name'])
+    StockTickerList.append(res10[i]['ticker'])
+
+StockNameTickerDF = pd.DataFrame(zip(StockNameList, StockTickerList), columns=['name', 'code'])
+
+
+def get_code_by_stock_name(name):
+    code1 = StockNameTickerDF[StockNameTickerDF['name'] == name]['code'].values[0]
+    return code1
+
 
 
 def dashboard(request, tradelog_code=None):
@@ -19,12 +38,11 @@ def dashboard(request, tradelog_code=None):
 
 def getDashBoardData(request, tradelog_code=None):
     if tradelog_code == None:
-        posts = TradeLog.objects.filter(user=request.user).order_by('-update_at')
+        posts = TradeLog.objects.filter(user=request.user).order_by('-trade_at')
     elif tradelog_code != None:
-        posts = TradeLog.objects.filter(user=request.user, code=tradelog_code).order_by('-update_at')
+        posts = TradeLog.objects.filter(user=request.user, code=tradelog_code).order_by('-trade_at')
         # return render(request, 'tradelog/dashboard.html', {'posts': posts})
 
-    """
     #stockrank
     mystock_rank_object = TradeLog.objects.filter(user=request.user)
     mystock_rank_raw1 = pd.DataFrame(mystock_rank_object.values())
@@ -49,12 +67,23 @@ def getDashBoardData(request, tradelog_code=None):
     tradelog_raw_gb_codeamount = tradelog_raw_minus1.groupby('code').sum()['amount']
     tradelog_raw_codeamount = pd.DataFrame(zip(tradelog_raw_gb_codeamount.index, tradelog_raw_gb_codeamount.values),
                                            columns=['code', 'amount'])
+    # d_today_raw = datetime.today()
+    # d_today = d_today_raw.strftime('%Y-%m-%d')
+    # d_yesterday_raw = d_today_raw + timedelta(days=-2)
+    # d_yesterday = d_yesterday_raw.strftime('%Y-%m-%d')
+    # d_yyesterday_raw = d_today_raw + timedelta(days=-3)
+    # d_yyesterday = d_yyesterday_raw.strftime('%Y-%m-%d')
+    daylist_raw = list(requests.get('http://marketdata.monple.com/api/005930/').json()['data'].keys())
+    d_yesterday= daylist_raw[len(daylist_raw) - 1]
+    d_yyesterday = daylist_raw[len(daylist_raw) - 2]
+
+
 
     code_user = tradelog_raw_codeamount.code
     endprice_yesterday_raw = []
     for i in code_user:
         res = requests.get(f'http://marketdata.monple.com/api/{i}/')
-        endprice_yesterday_raw.append(res.json()['data']['1999-05-18'])
+        endprice_yesterday_raw.append(res.json()['data'][d_yesterday])
     endprice_yesterday = pd.DataFrame(zip(code_user, endprice_yesterday_raw), columns=['code', 'price_end'])
 
     total_asset_raw = tradelog_raw_codeamount.join(endprice_yesterday.set_index('code')['price_end'], on='code')
@@ -84,7 +113,7 @@ def getDashBoardData(request, tradelog_code=None):
     endprice_yyesterday_raw = []
     for i in code_user2:
         res = requests.get(f'http://marketdata.monple.com/api/{i}/')
-        endprice_yyesterday_raw.append(res.json()['data']['1999-05-17'])
+        endprice_yyesterday_raw.append(res.json()['data'][d_yyesterday])
     endprice_yyesterday = pd.DataFrame(zip(code_user, endprice_yyesterday_raw), columns=['code', 'priceyy'])
 
     total_return_raw = total_asset_raw2.join(endprice_yyesterday.set_index('code')['priceyy'], on='code')
@@ -137,9 +166,8 @@ def getDashBoardData(request, tradelog_code=None):
                'today_return': today_return,
                'date_forchart': date_forchart,
                'totalasset_forchart': totalasset_forchart,
+               "posts": posts,
                }
-    """
-    context = {"posts": posts, }
     profile = Profile.objects.get(user=request.user)
     if profile:
         context["profile"] = profile
@@ -153,6 +181,7 @@ def create(request):
     if (request.method == 'POST'):
         tradelog = TradeLog()
         tradelog.user = request.user
+        tradelog.code = get_code_by_stock_name(request.POST["name"])
         form = CreateForm(request.POST, instance=tradelog)
 
         # 가격과 거래량 검사
@@ -213,3 +242,12 @@ def delete(request, tradelog_id):
     my_tradelog = get_object_or_404(TradeLog, pk=tradelog_id)
     my_tradelog.delete()
     return redirect('tradelog:dashboard')
+
+class NameAutocompleteFromList(autocomplete.Select2ListView):
+    def get_list(self):
+        res3 = requests.get('http://marketdata.monple.com/api/').json()
+        NameAutocompleteList = []
+        for i in range(len(res3)):
+            NameAutocompleteList.append(res3[i]['name'])
+        NameAutocompleteList.sort()
+        return (NameAutocompleteList)

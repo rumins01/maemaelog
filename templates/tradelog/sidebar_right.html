@@ -2,58 +2,15 @@
 <div class="p-4 h-14 bg-primary">
     <p class="text-white font-semibold">RANKING</p>
 </div>
-
-<!-- {% for name, amount in mystock_rank.items %}
-<div class="p-4 border-b">
-    <h1>
-        {{ name }}
-        {{ amount }}
-    </h1>
-</div> 
-{% endfor %}-->
+{% for name, amount in mystock_rank.items %}
 <div class="p-4 border-b flex justify-between">
     <div>
         <span class="font-semibold text-lg px-4">1</span>
         <img src="{% static '/image/profileimg_empty.png' %}" class="w-8 h-8 rounded-full bg-gray-100 inline"/>
-        <span>삼성전자</span>
+        <span>{{name}}</span>
     </div>
     <div class="px-8">
-        100
+        {{amount}}
     </div>
 </div>
-<div class="p-4 border-b flex justify-between">    
-    <div>
-        <span class="font-semibold text-lg px-4">2</span>
-        <img src="{% static '/image/profileimg_empty.png' %}" class="w-8 h-8 rounded-full bg-gray-100 inline"/>
-        <span>삼성전자</span>
-    </div>
-    <div class="px-8">
-        100
-    </div>
-</div>
-<div class="p-4 border-b flex justify-between">    
-    <div>
-        <span class="font-semibold text-lg px-4">3</span>
-        <img src="{% static '/image/profileimg_empty.png' %}" class="w-8 h-8 rounded-full bg-gray-100 inline"/>
-        <span>삼성전자</span>
-    </div>
-    <div class="px-8">
-        100
-    </div>
-</div>
-<div class="p-4 border-b flex justify-between">  
-    <div>
-        <span class="font-semibold text-lg px-4">4</span>
-        <img src="{% static '/image/profileimg_empty.png' %}" class="w-8 h-8 rounded-full bg-gray-100 inline"/>
-        <span>삼성전자</span>
-    </div>
-    <div class="px-8">
-        100
-    </div>
-</div>
-
-
-
-
-
-
+{% endfor %}

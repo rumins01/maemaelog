@@ -6,8 +6,8 @@ from django.utils import timezone
 
 class TradeLog(models.Model):
     TRADE_TYPE = [
-        ('B', 'Buy'),
-        ('S', 'Sell')
+        ('B', '매수'),
+        ('S', '매도')
     ]
 
     user = models.ForeignKey(User,on_delete=models.CASCADE)
