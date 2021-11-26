@@ -8,6 +8,7 @@ click==8.0.3
 colorama==0.4.4
 cookiecutter==1.7.3
 Django==3.2.8
+django-autocomplete-light==3.8.2
 django-cors-headers==3.10.0
 django-environ==0.8.1
 django-tailwind==2.2.2
